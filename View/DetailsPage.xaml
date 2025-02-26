@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiFirstApp.View.DetailsPage"
+             NavigationPage.HasNavigationBar="False">
+    <Grid HorizontalOptions="Fill" VerticalOptions="Fill">
+        <Image 
+            Aspect="AspectFit" Source="{Binding SelectedProperty.DefaultImage}"
+             />
+        <Grid RowDefinitions="*,Auto">
+            <VerticalStackLayout x:Name="sideView">
+                <Grid x:Name="imageView" WidthRequest="80" VerticalOptions="Start" HorizontalOptions="End" Margin="0,80,20,0">
+                    <Rectangle Fill="White" RadiusX="40" RadiusY="40" StrokeThickness="0" Opacity="0.9"/>
+                    <CollectionView Margin="0,10" ItemsSource="{Binding PropertyImages}" >
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border WidthRequest="60" HeightRequest="60" HorizontalOptions="Center" StrokeShape="RoundRectangle 30" StrokeThickness="0" Margin="0,0,0,10">
+                                    <Image Aspect="AspectFill" Source="{Binding .}" WidthRequest="60" HeightRequest="60" HorizontalOptions="Center" />
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                        <CollectionView.Footer>
+                            <VerticalStackLayout>
+                            <Border WidthRequest="60" HeightRequest="60" HorizontalOptions="Center" BackgroundColor="BlueViolet" StrokeShape="RoundRectangle 30"
+                                    StrokeThickness="0"/>
+                            <Label Text="{Binding MoreItems, StringFormat='+{0}'}" TextColor="White" FontSize="10" HorizontalOptions="Center" VerticalOptions="Center"/>
+                            </VerticalStackLayout>
+                        </CollectionView.Footer>
+                    </CollectionView>
+                </Grid>
+                <Grid x:Name="deatilsBtn" HorizontalOptions="End" Margin="0,60,20,0">
+                    <Rectangle Fill="White" StrokeThickness="0" HeightRequest="115" WidthRequest="115" RadiusX="60" RadiusY="60" Opacity="0.9"/>
+                    <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                        <Image Source="arrow.png" WidthRequest="15"/>
+                        <Label Text="Details" FontSize="20" TextColor="Black" Opacity="0.5"/>
+                    </VerticalStackLayout>
+                </Grid>
+            </VerticalStackLayout>
+            <Grid Grid.Row="1" x:Name="popView">
+                <Border BackgroundColor="White" StrokeShape="RoundRectangle 35, 35, 0, 0" StrokeThickness="0" Opacity="0.9" HorizontalOptions="Fill">
+                    <Grid Padding="30">
+                        <VerticalStackLayout>
+                            <VerticalStackLayout x:Name="addressView">
+                                <Label Text="{Binding SelectedProperty.Address}" TextColor="Black" FontSize="20" Opacity="0.5"></Label>
+                                <Label Text="{Binding SelectedProperty.Price, StringFormat='${0:###,###}'}" TextColor="Black" FontSize="28" FontAttributes="Bold"></Label> 
+                            </VerticalStackLayout>
+                            <Button x:Name="buyBtn" Text="Buy Now" BackgroundColor="LightBlue" TextColor="White" FontAttributes="Bold"
+                             HeightRequest="50" WidthRequest="200" CornerRadius="25" HorizontalOptions="Start" Margin="0,20,0,0"></Button>
+                        </VerticalStackLayout>
+                        <ImageButton BackgroundColor="Transparent" Source="close.png" WidthRequest="40" HorizontalOptions="End" VerticalOptions="End" Command="{Binding CloseCommand}"/>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+    </Grid>
+</ContentPage>
